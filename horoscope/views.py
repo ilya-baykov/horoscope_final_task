@@ -32,4 +32,6 @@ def type_menu(request):
 
 
 def current_type(request, current_type):
-    return HttpResponse(f"fkldkfdkf")
+    for current_type_en, current_type_ru in signs_type.items():
+        if current_type == current_type_en:
+            return display_elem_sign(current_type_ru)

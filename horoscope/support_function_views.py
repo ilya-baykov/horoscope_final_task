@@ -41,3 +41,13 @@ def display_type_menu():
         total_display += f"<li><a href = '{url_link}/{elem}'>{elem}</a></li>"
     total_display += "</ul>"
     return HttpResponse(f"{total_display}")
+
+
+def display_elem_sign(current_type):
+    total_dispalay = "<ul>"
+    elem_signs = ZodiacSign.elem_signs.get(current_type)
+    for sign in elem_signs:
+        url_link = reverse("current_sign_url", args=(sign,))
+        total_dispalay += f"<li><a href = '{url_link}'>{sign}</a></li>"
+    total_dispalay += "</ul>"
+    return HttpResponse(f"{total_dispalay}")

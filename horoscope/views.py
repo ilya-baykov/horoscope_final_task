@@ -4,14 +4,10 @@ from django.urls import reverse
 from horoscope.support_cls import *
 from horoscope.support_function_views import *
 
-all_signs_dict = ZodiacSign.all_sign
-all_signs_list = list(ZodiacSign.all_sign)
-print(all_signs_dict)
-
 
 # Create your views here.
-def test(request):
-    return HttpResponseNotFound(f"Данная страница еще не создана ;3")
+def menu(request):
+    return display_menu()
 
 
 #
@@ -29,3 +25,11 @@ def current_sign_info_int(request, current_sign_int):
         return HttpResponseRedirect(url_link)
     else:
         return HttpResponseNotFound(f"Извините, но мы не знаем знак зодиака под номером {current_sign_int}")
+
+
+def type_menu(request):
+    return display_type_menu()
+
+
+def current_type(request, current_type):
+    return HttpResponse(f"fkldkfdkf")

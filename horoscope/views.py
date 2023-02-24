@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseRedirect
-from django.urls import reverse
-from horoscope.support_cls import *
+from horoscope.data_time_cls import DataTime
 from horoscope.support_function_views import *
 
 
@@ -35,3 +34,11 @@ def current_type(request, current_type):
     for current_type_en, current_type_ru in signs_type.items():
         if current_type == current_type_en:
             return display_elem_sign(current_type_ru)
+
+
+def time_search(request, month, day):
+    quantity = DataTime.data_month_info.get(month)
+    if 12 >= month > 0 and quantity[1] >= day > 0:
+        return time_search_sign(month, day)
+    else:
+        return HttpResponseNotFound(f"Вы непраильно ввели дату , {quantity[0]} {quantity[1]} дней")

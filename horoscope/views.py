@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponse
 from horoscope.support_cls import *
-from horoscope.requst_prediction import advice, warning
 from horoscope.support_function_views import *
 
 all_signs_dict = ZodiacSign.all_sign

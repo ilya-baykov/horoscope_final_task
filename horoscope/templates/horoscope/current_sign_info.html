@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ current_sign|capfirst }}</title>
+    <title> {{validation|first|capfirst}} </title>
 </head>
 <body>
-
+    <h1>
+        <div style='text-align: center;'>{{validation|first|capfirst}}</div>
+    </h1>
+    <br>
+    <p><b>Советы на сегодня</b></p>
+    <div>{{prediction|safe}}</div>
+    <p><b>Будьте осторожней</b></p>
+    <div>{{warning|safe}}</div>
 </body>
 </html>
 
-
-<!--# def display(current_sign, info: list):-->
-<!--#     current_sign = Prediction(current_sign)-->
-<!--#     res = f"<h1><div style='text-align: center;'>{info[1]}</div></h1><br>"-->
-<!--#     res += f"<p><b>Советы на сегодня</b></p>"-->
-<!--#     res += f"{current_sign.prediction}"-->
-<!--#     res += f"<p><b>Будьте осторожней</b></p>"-->
-<!--#     res += f"{current_sign.warning}"-->
-<!--#     return HttpResponse(f"{res}")-->

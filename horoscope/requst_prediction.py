@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
+
+
+
 class Prediction:
 
     def __init__(self, current_sign: str):
@@ -17,7 +20,7 @@ class Prediction:
                              class_='article article_white article_prediction article_collapsed margin_top_20').find_all(
                 "p")
             return test
-        except Exception:
+        except AttributeError:
             return [False, False]
 
     @property
@@ -27,4 +30,3 @@ class Prediction:
     @property
     def warning(self):
         return list(Prediction.treatment_info(self))[1]
-

@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> {{validation|first|capfirst}} </title>
+    {% if validation is None %}
+        <title> Error </title>
+    {% else %}
+        <title> {{validation|first|capfirst}} </title>
+    {% endif %}
+
 </head>
 <body>
-    <h1>
-        <div style='text-align: center;'>{{validation|first|capfirst}}</div>
-    </h1>
-    <br>
-    <p><b>Советы на сегодня</b></p>
-    <div>{{prediction|safe}}</div>
-    <p><b>Будьте осторожней</b></p>
-    <div>{{warning|safe}}</div>
+    {% if validation is None %}
+        <p>Не знаем такой знак зодиака :c </p>
+
+    {% else %}
+        <h1>
+            <div style='text-align: center;'>{{validation|first|capfirst}}</div>
+        </h1>
+        <br>
+        <p><b>Советы на сегодня</b></p>
+        <div>{{prediction|safe}}</div>
+        <p><b>Будьте осторожней</b></p>
+        <div>{{warning|safe}}</div>
+    {% endif %}
 </body>
 </html>
-

@@ -14,13 +14,11 @@ def menu(request):
 
 #
 def current_sign_info_str(request, current_sign):
-    validation = all_signs_dict.get(current_sign)
-    current_sign = Prediction(current_sign)
+    current_sign_class = Prediction(current_sign)
     data = {
         'current_sign': current_sign,
-        'validation': validation,
-        "prediction": str(current_sign.prediction),
-        "warning": str(current_sign.warning),
+        'validation': all_signs_dict.get(current_sign),
+        "prediction": str(current_sign_class.prediction), "warning": str(current_sign_class.warning),
     }
     return render(request, 'horoscope/current_sign_info.html', context=data)
 
@@ -35,15 +33,17 @@ def current_sign_info_int(request, current_sign_int):
 
 def type_menu(request):
     contex = {
-        "signs_types": signs_type
+        "signs_types": signs_type_en_ru
     }
     return render(request, "horoscope/zodiacs_type_menu.html", context=contex)
 
 
 def current_type(request, current_type):
-    for current_type_en, current_type_ru in signs_type.items():
-        if current_type == current_type_en:
-            return display_elem_sign(current_type_ru)
+    contex = {
+        "current_type": current_type,
+        "elem_signs": ZodiacSign.elem_signs.get(signs_type_en_ru.get(current_type))
+    }
+    return render(request, "horoscope/menu_elem_signs.html", context=contex)
 
 
 def time_search(request, month, day):

@@ -7,22 +7,12 @@ import re
 
 all_signs_dict = ZodiacSign.all_sign
 all_signs_list = list(ZodiacSign.all_sign)
-signs_type = {
+signs_type_en_ru = {
     "fire": "Огня",
     "earth": "Земли",
     "air": "Воздушные",
     "water": "Водные"
 }
-
-
-def display_elem_sign(current_type):
-    total_display = "<ul>"
-    elem_signs = ZodiacSign.elem_signs.get(current_type)
-    for sign in elem_signs:
-        url_link = reverse("current_sign_url", args=(sign,))
-        total_display += f"<li><a href = '{url_link}'>{sign}</a></li>"
-    total_display += "</ul>"
-    return HttpResponse(f"{total_display}")
 
 
 def display_date_search(sign, month, day):

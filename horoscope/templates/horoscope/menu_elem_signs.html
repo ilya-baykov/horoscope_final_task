@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{current_type|capfirst}}</title>
+</head>
+<body>
+    <ul>
+        {% for sign in elem_signs %}
+            <li><a href = '{% url "current_sign_url" sign %}'>{{ sign }}</a></li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

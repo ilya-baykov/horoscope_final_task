@@ -10,7 +10,7 @@
     </h3>
     <ul>
         {% for sign in all_signs_list %}
-            <li><a href="{% url 'current_sign_url' current_sign=sign %}">{{sign|capfirst}}</a></li>
+            <li><a href="{% url 'current_sign_url' sign %}">{{sign|capfirst}}</a></li>
         {% endfor %}
     </ul>
 </body>

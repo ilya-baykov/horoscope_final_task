@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>
+        <div style='text-align: center;'>Стихии знаков зодиака</div>
+    </h3>
+    <ul>
+        {% for type_en, type_ru in signs_types.items %}
+            <li>{{type_ru|capfirst}}</li>
+        {% empty %}
+            <h3>Извините , но переданный список знаков зодиака пуст ;с </h3>
+        {% endfor %}
+
+    </ul>
+
+</body>
+</html>
+
+
+<!--    # for elem in signs_type:-->
+<!--    #     url_link = reverse("url_type")-->
+<!--    #     total_display += f"<li><a href = '{url_link}/{elem}'>{elem}</a></li>"-->
+

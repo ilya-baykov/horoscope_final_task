@@ -15,36 +15,6 @@ signs_type = {
 }
 
 
-def display(current_sign, info: list):
-    current_sign = Prediction(current_sign)
-    res = f"<h1><div style='text-align: center;'>{info[1]}</div></h1><br>"
-    res += f"<p><b>Советы на сегодня</b></p>"
-    res += f"{current_sign.prediction}"
-    res += f"<p><b>Будьте осторожней</b></p>"
-    res += f"{current_sign.warning}"
-    return HttpResponse(f"{res}")
-
-
-def display_menu():
-    total = f"<h3><div style='text-align: center;'>Меню выбора знака зодиака</div></h3>"
-    total += "<ol>"
-    for sign in all_signs_list:
-        url_link = reverse("current_sign_url", args=(sign,))
-        total += f"<li><a href = '{url_link}'>{sign.title()}</a></li>"
-    total += "</ol>"
-    return HttpResponse(f"{total}")
-
-
-def display_type_menu():
-    total_display = f"<h3><div style='text-align: center;'>Стихии знаков зодиака</div></h3>"
-    total_display += "<ul>"
-    for elem in signs_type:
-        url_link = reverse("url_type")
-        total_display += f"<li><a href = '{url_link}/{elem}'>{elem}</a></li>"
-    total_display += "</ul>"
-    return HttpResponse(f"{total_display}")
-
-
 def display_elem_sign(current_type):
     total_display = "<ul>"
     elem_signs = ZodiacSign.elem_signs.get(current_type)

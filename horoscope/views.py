@@ -6,7 +6,10 @@ from horoscope.support_function_views import *
 
 # Create your views here.
 def menu(request):
-    return display_menu()
+    contex = {
+        "all_signs_list": all_signs_list,
+    }
+    return render(request, "horoscope/main_menu_zodiacs.html", context=contex)
 
 
 #
@@ -31,7 +34,10 @@ def current_sign_info_int(request, current_sign_int):
 
 
 def type_menu(request):
-    return display_type_menu()
+    contex = {
+        "signs_types": signs_type
+    }
+    return render(request, "horoscope/zodiacs_type_menu.html", context=contex)
 
 
 def current_type(request, current_type):

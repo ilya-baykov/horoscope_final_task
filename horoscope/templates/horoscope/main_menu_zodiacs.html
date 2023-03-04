@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zodiacs</title>
+</head>
+<body>
+    <h3>
+        <div style='text-align: center;'><p>Меню выбора знака зодиака</p></div>
+    </h3>
+    <ul>
+        {% for sign in all_signs_list %}
+            <li><a href="{% url 'current_sign_url' current_sign=sign %}">{{sign|capfirst}}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

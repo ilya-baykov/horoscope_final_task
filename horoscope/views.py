@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
 from horoscope.requst_prediction import *
 from horoscope.support_function_views import *
 

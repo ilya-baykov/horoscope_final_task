@@ -1,9 +1,7 @@
 from django.http import HttpResponse
 from django.urls import reverse
-from horoscope.requst_prediction import Prediction
 from horoscope.support_cls import ZodiacSign
 from horoscope.data_time_cls import DataTime
-import re
 
 all_signs_dict = ZodiacSign.all_sign
 all_signs_list = list(ZodiacSign.all_sign)
@@ -13,6 +11,19 @@ signs_type_en_ru = {
     "air": "Воздушные",
     "water": "Водные"
 }
+MONTH_POSITION = dict(zip(
+    [int(i) for i in range(1, 13)],
+    ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь",
+     "Декабрь"]))
+
+month_quantity_dict = DataTime.data_month_info
+
+
+def search_sign_by_date(month: int, day: int, quantity: int) -> str | tuple:
+    if 12 >= month > 0 and quantity >= day > 0:
+        return time_search_sign(month, day)
+    else:
+        return f"Дата введена неверно - {day} {month}"
 
 
 def display_date_search(sign, month, day):
@@ -32,8 +43,11 @@ def time_search_sign(month, day):
     for sign, interval in intervals.items():
         verdict = interval[0] <= day_of_the_year_result <= interval[1]
         if verdict:
-            return display_date_search(sign, month, day)
-    return display_date_search("capricorn", month, day)
+            return sign, month, day
+    return "capricorn", month, day
+    #     if verdict:
+    #         return display_date_search(sign, month, day)
+    # return display_date_search("capricorn", month, day)
 
 
 def day_of_the_year(month) -> int:
@@ -41,6 +55,6 @@ def day_of_the_year(month) -> int:
     result = 0
     current_month = 1
     while current_month < month:
-        result += DataTime.data_month_info.get(current_month)[1]
+        result += month_quantity_dict.get(current_month)
         current_month += 1
     return result

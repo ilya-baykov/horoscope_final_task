@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseRedirect
-from horoscope.data_time_cls import DataTime
+from horoscope.requst_prediction import *
 from horoscope.support_function_views import *
 
 
 # Create your views here.
 def menu(request):
+    """ Выводит меню всех знаком зодиака"""
+
     contex = {
         "all_signs_list": all_signs_list,
     }
@@ -14,6 +16,8 @@ def menu(request):
 
 #
 def current_sign_info_str(request, current_sign):
+    """ Выводит информацию о конкретном знаке зодиака """
+
     current_sign_class = Prediction(current_sign)
     data = {
         'current_sign': current_sign,
@@ -24,6 +28,8 @@ def current_sign_info_str(request, current_sign):
 
 
 def current_sign_info_int(request, current_sign_int):
+    """ Переводит на ссылку с информацией о конкретном знаке зодиака
+    * срабатывает, если пользователь ввел числовое значение ( номер знака ) * """
     if len(all_signs_dict) >= current_sign_int > 0:
         url_link = reverse("current_sign_url", args=(list(all_signs_list)[current_sign_int - 1],))
         return HttpResponseRedirect(url_link)
@@ -32,13 +38,16 @@ def current_sign_info_int(request, current_sign_int):
 
 
 def type_menu(request):
+    """ Выводит меню стихий знаков зодиака """
     contex = {
         "signs_types": signs_type_en_ru
     }
     return render(request, "horoscope/zodiacs_type_menu.html", context=contex)
 
 
-def current_type(request, current_type):
+def current_type_func(request, current_type):
+    """ Выводит меню всех знаков зодиака конкретной стихии  """
+
     contex = {
         "current_type": current_type,
         "elem_signs": ZodiacSign.elem_signs.get(signs_type_en_ru.get(current_type))
@@ -47,8 +56,15 @@ def current_type(request, current_type):
 
 
 def time_search(request, month, day):
-    quantity = DataTime.data_month_info.get(month)
-    if 12 >= month > 0 and quantity[1] >= day > 0:
-        return time_search_sign(month, day)
-    else:
-        return HttpResponseNotFound(f"Вы непраильно ввели дату , {quantity[0]} {quantity[1]} дней")
+    """ Выводит найденный по дате ( месяц , день ) знак зодиака """
+
+    quantity = month_quantity_dict.get(month)
+    info = search_sign_by_date(month, day, quantity)
+    contex = {
+        "sign_name_en": info[0],
+        "sign_month_position": month,
+        "month": MONTH_POSITION.get(month),
+        "day_of_the_month": day,
+        "sign_info": ZodiacSign.all_sign.get(info[0])[1]
+    }
+    return render(request, "horoscope/Sign_Found_by_date.html", context=contex)

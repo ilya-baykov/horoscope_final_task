@@ -1,12 +1,15 @@
+from datetime import date
+import calendar
+
+
 class DataTime:
     __month_info = {}
 
-    def __init__(self, position: int, month: str, quantity: int):
-        self.__position = position
+    def __init__(self, month: int, quantity: int):
         self.__month = month
 
         self.__quantity = quantity
-        DataTime.__month_info.setdefault(position, []).extend([month, quantity])
+        DataTime.__month_info.setdefault(month, quantity)
 
     @classmethod
     @property
@@ -14,16 +17,10 @@ class DataTime:
         return cls.__month_info
 
 
-DataTime(1, "январь", 31)
-DataTime(2, "февраль", 28)
-DataTime(3, "март", 31)
-DataTime(4, "апрель", 30)
-DataTime(5, "май", 31)
-DataTime(6, "июнь", 30)
-DataTime(7, "июль", 31)
-DataTime(8, "август", 31)
-DataTime(9, "сентябрь", 30)
-DataTime(10, "октябрь", 31)
-DataTime(11, "ноябрь", 30)
-DataTime(12, "декабрь", 31)
+current_year = date.today().year
+my_calendar = calendar.Calendar()
 
+# создаем экземпляры класса DataTime
+# {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+for month_position in range(1, 12 + 1):
+    DataTime(month_position, max(my_calendar.itermonthdays(current_year, month_position)))

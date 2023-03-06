@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{sign_name_en|capfirst}}</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    {{sign_name_en|capfirst}}
+{% endblock %}
+
+{% block content %}
     <h2> Месяц - {{ month }}, День - {{ day_of_the_month }}</h2>
     <a href="{% url 'current_sign_url' sign_name_en %}">{{sign_info}}</a>
-</body>
-</html>
-
+{% endblock %}

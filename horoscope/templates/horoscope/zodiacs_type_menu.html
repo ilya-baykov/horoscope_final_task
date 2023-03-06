@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Element</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    Element
+{% endblock %}
+
+{% block content %}
     <h3>
         <div style='text-align: center;'>Стихии знаков зодиака</div>
     </h3>
@@ -16,5 +15,5 @@
         {% endfor %}
 
     </ul>
-</body>
-</html>
+{% endblock %}
+

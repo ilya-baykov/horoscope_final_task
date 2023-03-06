@@ -51,7 +51,8 @@ def current_type_func(request, current_type):
     """ Выводит меню всех знаков зодиака конкретной стихии  """
 
     contex = {
-        "current_type": current_type,
+        "current_type_en": current_type,
+        "current_type_ru": signs_type_en_ru.get(current_type),
         "elem_signs": ZodiacSign.elem_signs.get(signs_type_en_ru.get(current_type))
     }
     return render(request, "horoscope/menu_elem_signs.html", context=contex)

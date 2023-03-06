@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% if validation is None %}
-        <title> Error </title>
-    {% else %}
-        <title> {{validation|first|capfirst}} </title>
-    {% endif %}
+{% extends "base.html" %}
 
-</head>
-<body>
+{% block title %}
+    {% if validation is None %}
+        Error
+    {% else %}
+        {{validation|first|capfirst}}
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
     {% if validation is None %}
         <p>Не знаем такой знак зодиака :c </p>
     {% else %}
@@ -22,5 +21,6 @@
         <p><b>Будьте осторожней</b></p>
         <div>{{warning|safe}}</div>
     {% endif %}
-</body>
-</html>
+{% endblock %}
+
+

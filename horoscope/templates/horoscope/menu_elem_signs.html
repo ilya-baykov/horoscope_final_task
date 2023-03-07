@@ -5,6 +5,7 @@
 
 {% block content %}
     <h2 style="text-align: center;"> Стихии {{current_type_ru|capfirst}} </h2>
+    {% include "includes/navbar.html" %}
     <ul>
         {% for sign in elem_signs %}
             <li><a href = '{% url "current_sign_url" sign %}'>{{ sign|capfirst }}</a></li>

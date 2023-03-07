@@ -7,6 +7,7 @@
     <h3>
         <div style='text-align: center;'>Стихии знаков зодиака</div>
     </h3>
+    {% include "includes/navbar.html" %}
     <ul>
         {% for type_en, type_ru in signs_types.items %}
             <li><a href="{% url 'url_type' type_en %}"> {{type_ru|capfirst}} </a></li>

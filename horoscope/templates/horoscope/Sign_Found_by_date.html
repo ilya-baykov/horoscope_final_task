@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block content %}
+    {% include "includes/navbar.html" %}
     <h2> Месяц - {{ month }}, День - {{ day_of_the_month }}</h2>
     <a href="{% url 'current_sign_url' sign_name_en %}">{{sign_info}}</a>
 {% endblock %}
